@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/</id>
+  <link href="http://blog.url.com/"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2015-11-03T02:00:00+02:00</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>Police your code with Rubocop</title>
+    <link rel="alternate" href="http://blog.url.com/2015/11/03/police-your-code-with-rubocop.html"/>
+    <id>http://blog.url.com/2015/11/03/police-your-code-with-rubocop.html</id>
+    <published>2015-11-03T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Keeping your code on a project in shape is a daily challenge but there is a a ruby gem called 
+&lt;a href="https://github.com/bbatsov/rubocop"&gt;rubocop&lt;/a&gt; that can help you with this.
+&lt;/p&gt;
+
+&lt;p&gt;I have been using &lt;a href="https://github.com/bbatsov/rubocop"&gt;rubocop&lt;/a&gt; on the grocery app and a few other projects for a while 
+now. It's is really a great tool to help keep your code quality in check. Rubocop is a Ruby static code analyzer that 
+is based on the &lt;a href="https://github.com/bbatsov/ruby-style-guide"&gt;Ruby Style Guide&lt;/a&gt; and 
+&lt;a href="https://github.com/bbatsov/rails-style-guide"&gt;Rails Style Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Getting started with it is real simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-shell"&gt;  gem install rubocop
+  rubocop -R # run inside your Rails Project
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You might feel that some of these suggestions are splitting hairs. For example things such as single quotes vs double quotes, 
+indentations and blank lines. These simple ones are usually easily fixed by using rubocop's builtin autofix functionality. 
+Just run &lt;code&gt;rubocop -aR&lt;/code&gt; which will automatically update your code for these more simpler rules.&lt;/p&gt;
+
+&lt;p&gt;Rules that you feel is against your personal style, eg documenting classes, methods should not start with "get" or 
+"set" as it can easily be turned off or tuned by adding a .rubocop.yml to your project root folder.&lt;/p&gt;
+
+&lt;p&gt;If you follow those guideslines and refactor accordly you should end with simpler, more readable and more maintainable
+code.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Vagrant and Ansible the ultimate combo</title>
+    <link rel="alternate" href="http://blog.url.com/2015/09/27/vagrant-and-ansible.html"/>
+    <id>http://blog.url.com/2015/09/27/vagrant-and-ansible.html</id>
+    <published>2015-09-27T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So for the last few months I have been using &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and 
+&lt;a href="http://www.ansible.com/configuration-management"&gt;Ansible&lt;/a&gt; for any new projects that I have to work on. &lt;/p&gt;
+
+&lt;p&gt;The idea behind vagrant is to allow you to isolate all the software requirements to run your code for different projects
+inside separate virtual machines. Vagrant makes it easier to work on different projects with conflicting requirements by
+isolating them in different virtual machines. For example, two different projects requiring different versions of MYSQL.
+It also has the added benefit of not cluttering your actual machine with all the projects unique and different software 
+requirements.&lt;/p&gt;
+
+&lt;p&gt;Ansible is a powerful automation tool that allows you to easily setup new (and old) servers with the required
+software it needs. This makes setting up new enviroments a breeze.&lt;/p&gt;
+
+&lt;p&gt;The combination of Anisble and Vagrant is currently a real powerful way of setting up development
+enviroments quickly. If you add the Ansible scripts to your source control, you will have the changing requirements
+of your application setup in your source history.&lt;/p&gt;
+
+&lt;p&gt;I have recently taken the challenge of destroying my virtual machines every Monday and rebuilding it using Vagrant and
+ Ansible. The idea being that I should be able to continue working within minutes and if that is not the case, updating
+ the Ansible scripts with the required changes. This will help me make sure anything important required to work on the
+ project is in source control, whether that be code, data or software setup.&lt;/p&gt;
+
+&lt;p&gt;This is currently my prefered method of working with the my-grocery-price-book-code. If you too are interested in this
+sort of setup, I recommended you take a look at&lt;br /&gt;
+&lt;a href="https://bitbucket.org/grantspeelman/my-grocery-price-book.co.za/src/d43c1610845416273530eb526e038c42bb70b813/Vagrantfile?at=master&amp;amp;fileviewer=file-view-default#Vagrantfile-120"&gt;Vagrantfile&lt;/a&gt;
+and the
+&lt;a href="https://bitbucket.org/grantspeelman/my-grocery-price-book.co.za/src/d43c1610845416273530eb526e038c42bb70b813/ansible/?at=master"&gt;Ansible Scripts&lt;/a&gt;
+of the my grocery price book code.&lt;/p&gt;
+
+&lt;p&gt;Also if you have not worked with either of the 2 before or would like to know more about them, I recommend you check
+out their Getting Started pages:
+&lt;a href="https://docs.vagrantup.com/v2/getting-started/"&gt;Vagrant&lt;/a&gt; and &lt;a href="http://docs.ansible.com/ansible/intro_getting_started.html"&gt;Ansible&lt;/a&gt;&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Current System Architecture</title>
+    <link rel="alternate" href="http://blog.url.com/2015/09/09/system-architecture.html"/>
+    <id>http://blog.url.com/2015/09/09/system-architecture.html</id>
+    <published>2015-09-09T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Having a system architecture might seem like overkill for this project, but I am hoping it will help me keep the
+system in my head and help make more insightful decisions. &lt;/p&gt;
+
+&lt;p&gt;I almost always find it easy to talk about system architecture when you have a diagram. So I decided to create one using
+&lt;a href="https://www.draw.io/"&gt;draw.io&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="alt text" title="Grocery Price Book System Architecture" src="/images/GrocerySystemArch.svg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;So the goal is to link the traditional Grocery Price Book with the of Crowd Sourcing. This will hopefully make it
+easier for people to share pricing information thus increasing the power of your Price Book.&lt;/p&gt;
+
+&lt;p&gt;The system has been split into 2 main apps. The User Facing Price Book application part that will handle all the user 
+specific information and a API to store all the pricing infomation. This should make it possible for vendors to load 
+their pricing infomation into the API if they want to.This is all still mostly theory at the moment. 
+Hoping to start eating my own dog food soon.&lt;/p&gt;
+
+&lt;p&gt;On a slightly different note…&lt;/p&gt;
+
+&lt;p&gt;I have recently completed 'viewing your prices' on the price book page which pulls its infomation from the API.
+Things left to do is build the 'Shopping List' and completing the 'Price Compare' sections, then we should have 
+our MVP.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>The Free Time Pickle and discovering Roda</title>
+    <link rel="alternate" href="http://blog.url.com/2015/08/30/the-free-time-pickle.html"/>
+    <id>http://blog.url.com/2015/08/30/the-free-time-pickle.html</id>
+    <published>2015-08-30T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So doing this project during my free time has been quite a challenge for me so far
+I usually have about 7 to 10 hours a week in the evenings to work on developing.
+Usually I use this time to either mess around with a new technology or sometimes I find 
+myself still doing work.&lt;/p&gt;
+
+&lt;p&gt;I have been busy this week refactoring the grocery api to use the 
+&lt;a href="https://github.com/jeremyevans/roda"&gt;roda&lt;/a&gt; which has turned into a bigger refactor than
+I thought it would be (due to having to do the type casting myself). I must say I
+do feel much better the way the code looks now and I do feel like the code is more 
+under my control but from the outside I have not really added anything.&lt;/p&gt;
+
+&lt;p&gt;I realise I am doing these kinds of refactoring a bit early (putting the perfect project on ice) 
+and I am more likely at the point where I have to let the technical debt build up until I have 
+a working product. Who knows I might never change it and never have to pay back that technical debt?&lt;/p&gt;
+
+&lt;p&gt;I am hoping to keep these kind of detours under control by taking some advice from a 
+&lt;a href="http://programmers.stackexchange.com/a/76877"&gt;stackexchange answer&lt;/a&gt; and focus on getting
+a working project that is usable.&lt;/p&gt;
+
+&lt;p&gt;That all said, don't forget to check out &lt;a href="https://github.com/jeremyevans/roda"&gt;roda&lt;/a&gt;. 
+Janko Marohnić &lt;a href="http://twin.github.io/introduction-to-roda/"&gt;post&lt;/a&gt; is a nice intro.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>The Big Picture</title>
+    <link rel="alternate" href="http://blog.url.com/2015/08/24/the-big-picture.html"/>
+    <id>http://blog.url.com/2015/08/24/the-big-picture.html</id>
+    <published>2015-08-24T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;So what am i trying to accomplish is building a online price book you can use for your grocery shopping 
+If you don't know what a Price Book is I suggest you read &lt;a href="https://en.wikipedia.org/wiki/Price_book"&gt;Wikipedia Definition&lt;/a&gt;
+and Melanie Pinola's blog article on &lt;a href="http://lifehacker.com/how-to-save-the-most-money-on-your-grocery-budget-with-1518202640"&gt;How to Save the Most Money on Your Grocery Budget with a Price Book&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Below I have a flow-chart (built with &lt;a href="http://www.draw.io/"&gt;draw.io&lt;/a&gt;) that shows you what a grocery price booker
+has to do.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="alt text" title="Grocery Price Book Overview" src="/images/GroceryPriceBookOverview.jpg" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Yellow blocks are what all shoppers have to do while the Red blocks show what price bookers do in addition.
+These very Red blocks make keeping a price book a serious discipline. So basically the goal of the WIP 
+&lt;a href="http://www.my-grocery-price-book.co.za"&gt;my-grocery-price-book&lt;/a&gt; is to make keeping a price book less labour
+intensive and hopefully using crowd sourcing to make it ever easier to maintain and start a grocery price book.&lt;/p&gt;
+
+&lt;p&gt;Hopefully this has set the stage…&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Comments are welcome</title>
+    <link rel="alternate" href="http://blog.url.com/2015/08/20/comments-are-welcome.html"/>
+    <id>http://blog.url.com/2015/08/20/comments-are-welcome.html</id>
+    <published>2015-08-20T02:00:00+02:00</published>
+    <updated>2016-01-29T17:57:50+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;Using &lt;a href="https://disqus.com/"&gt;Disqus&lt;/a&gt; for comments because a real blog needs comments right? :)&lt;/p&gt;
+
+&lt;p&gt;I found it really easy to setup and their admin dashboard seems great, definitely feels like a quick win.
+They have tools to import comments from another system and a way to migrate comments if you switch blogging platforms.&lt;/p&gt;
+
+&lt;p&gt;If you want to add comments to your static pages, &lt;a href="https://disqus.com/"&gt;Disqus&lt;/a&gt; is a good option for this.&lt;/p&gt;
+</content>
+  </entry>
+</feed>
