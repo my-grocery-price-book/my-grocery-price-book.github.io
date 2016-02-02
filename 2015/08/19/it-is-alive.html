@@ -40,10 +40,10 @@
   <div class="row">
 
     <div class="col-sm-8 blog-main">
-        <div class="blog-post">
-    <h2 class="blog-post-title">Tech Blog is Alive</h2>
-    <p class="blog-post-meta">19 August 2015</p>
-    <p>So the Blog is alive and kicking and I will be blogging here 
+          <div class="blog-post">
+      <h2 class="blog-post-title">Tech Blog is Alive</h2>
+      <p class="blog-post-meta">19 August 2015</p>
+      <p>So the Blog is alive and kicking and I will be blogging here 
 about the journey of the grocery price book app I am building.</p>
 
 <p>I have finally settled on what tools I'll be using to write this blog, thanks to motivation from 
@@ -57,8 +57,31 @@ I <a href="http://getbootstrap.com">bootstrapped</a> it and wrote this first art
 
 <p>My thoughts and discoveries around this process have finally found a place to live on the internet of things.</p>
 
-  </div>
+    </div>
 
+    <div id="disqus_thread"></div>
+    <script>
+      /**
+       * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+       */
+      /*
+       var disqus_config = function () {
+       this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+       this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+       };
+       */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//my-grocery-price-book.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
     </div>
 

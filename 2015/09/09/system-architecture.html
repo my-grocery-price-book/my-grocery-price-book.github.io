@@ -40,10 +40,10 @@
   <div class="row">
 
     <div class="col-sm-8 blog-main">
-        <div class="blog-post">
-    <h2 class="blog-post-title">Current System Architecture</h2>
-    <p class="blog-post-meta">09 September 2015</p>
-    <p>Having a system architecture might seem like overkill for this project, but I am hoping it will help me keep the
+          <div class="blog-post">
+      <h2 class="blog-post-title">Current System Architecture</h2>
+      <p class="blog-post-meta">09 September 2015</p>
+      <p>Having a system architecture might seem like overkill for this project, but I am hoping it will help me keep the
 system in my head and help make more insightful decisions. </p>
 
 <p>I almost always find it easy to talk about system architecture when you have a diagram. So I decided to create one using
@@ -65,8 +65,31 @@ Hoping to start eating my own dog food soon.</p>
 Things left to do is build the 'Shopping List' and completing the 'Price Compare' sections, then we should have 
 our MVP.</p>
 
-  </div>
+    </div>
 
+    <div id="disqus_thread"></div>
+    <script>
+      /**
+       * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+       */
+      /*
+       var disqus_config = function () {
+       this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+       this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+       };
+       */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//my-grocery-price-book.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
     </div>
 
