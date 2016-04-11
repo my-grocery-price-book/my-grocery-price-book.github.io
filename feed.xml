@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Blog Name</title>
-  <subtitle>Blog subtitle</subtitle>
-  <id>http://blog.url.com/</id>
-  <link href="http://blog.url.com/"/>
-  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <title>My Grocery Price Book Blog</title>
+  <subtitle>The tech story behind the app and tools</subtitle>
+  <id>http://blog.my-grocery-price-book.co.za/</id>
+  <link href="http://blog.my-grocery-price-book.co.za/"/>
+  <link href="http://blog.my-grocery-price-book.co.za/feed.xml" rel="self"/>
   <updated>2016-04-11T02:00:00+02:00</updated>
   <author>
-    <name>Blog Author</name>
+    <name>Grant Petersen-Speelman</name>
   </author>
   <entry>
     <title>Writing jasmine test for reactjs components on Ruby on Rails</title>
-    <link rel="alternate" href="http://blog.url.com/2016/04/11/jasmine-test-for-react-rails.html"/>
-    <id>http://blog.url.com/2016/04/11/jasmine-test-for-react-rails.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/04/11/jasmine-test-for-react-rails.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/04/11/jasmine-test-for-react-rails.html</id>
     <published>2016-04-11T02:00:00+02:00</published>
     <updated>2016-04-11T09:15:37+02:00</updated>
     <author>
@@ -99,8 +99,8 @@ available.
   </entry>
   <entry>
     <title>Acceptance testing multiple sessions/actors using capybara</title>
-    <link rel="alternate" href="http://blog.url.com/2016/03/31/capybara-personas.html"/>
-    <id>http://blog.url.com/2016/03/31/capybara-personas.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/03/31/capybara-personas.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/03/31/capybara-personas.html</id>
     <published>2016-03-31T02:00:00+02:00</published>
     <updated>2016-03-31T08:42:35+02:00</updated>
     <author>
@@ -213,8 +213,8 @@ of the app&lt;/p&gt;
   </entry>
   <entry>
     <title>Reactjs Shopping Lists</title>
-    <link rel="alternate" href="http://blog.url.com/2016/03/23/reactjs-shopping-lists.html"/>
-    <id>http://blog.url.com/2016/03/23/reactjs-shopping-lists.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/03/23/reactjs-shopping-lists.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/03/23/reactjs-shopping-lists.html</id>
     <published>2016-03-23T02:00:00+02:00</published>
     <updated>2016-03-24T20:06:32+02:00</updated>
     <author>
@@ -246,8 +246,8 @@ Next up is figuring out how to write jasmine tests for my react components.&lt;/
   </entry>
   <entry>
     <title>Police your code with Rubocop</title>
-    <link rel="alternate" href="http://blog.url.com/2015/11/03/police-your-code-with-rubocop.html"/>
-    <id>http://blog.url.com/2015/11/03/police-your-code-with-rubocop.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2015/11/03/police-your-code-with-rubocop.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2015/11/03/police-your-code-with-rubocop.html</id>
     <published>2015-11-03T02:00:00+02:00</published>
     <updated>2016-01-29T17:57:50+02:00</updated>
     <author>
@@ -282,8 +282,8 @@ code.&lt;/p&gt;
   </entry>
   <entry>
     <title>Vagrant and Ansible the ultimate combo</title>
-    <link rel="alternate" href="http://blog.url.com/2015/09/27/vagrant-and-ansible.html"/>
-    <id>http://blog.url.com/2015/09/27/vagrant-and-ansible.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2015/09/27/vagrant-and-ansible.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2015/09/27/vagrant-and-ansible.html</id>
     <published>2015-09-27T02:00:00+02:00</published>
     <updated>2016-01-29T17:57:50+02:00</updated>
     <author>
@@ -325,8 +325,8 @@ out their Getting Started pages:
   </entry>
   <entry>
     <title>Current System Architecture</title>
-    <link rel="alternate" href="http://blog.url.com/2015/09/09/system-architecture.html"/>
-    <id>http://blog.url.com/2015/09/09/system-architecture.html</id>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2015/09/09/system-architecture.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2015/09/09/system-architecture.html</id>
     <published>2015-09-09T02:00:00+02:00</published>
     <updated>2016-01-29T17:57:50+02:00</updated>
     <author>
