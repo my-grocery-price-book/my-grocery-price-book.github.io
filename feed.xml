@@ -5,10 +5,127 @@
   <id>http://blog.my-grocery-price-book.co.za/</id>
   <link href="http://blog.my-grocery-price-book.co.za/"/>
   <link href="http://blog.my-grocery-price-book.co.za/feed.xml" rel="self"/>
-  <updated>2016-04-11T02:00:00+02:00</updated>
+  <updated>2016-04-21T02:00:00+02:00</updated>
   <author>
     <name>Grant Petersen-Speelman</name>
   </author>
+  <entry>
+    <title>Simple Reactjs AutoComplete using Typehead's Bloodhound</title>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/04/21/building-auto-complete.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/04/21/building-auto-complete.html</id>
+    <published>2016-04-21T02:00:00+02:00</published>
+    <updated>2016-04-21T11:35:49+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I wanted to add autocomplete to the shopping list, hopefully making it easier to build 
+them. Using Reactjs made it very difficult  to use out of the box autocompletes like 
+&lt;a href="https://twitter.github.io/typeahead.js/"&gt;typeahead&lt;/a&gt; and 
+&lt;a href="https://jqueryui.com/autocomplete/"&gt;jquery ui autocomplete&lt;/a&gt; 
+because Reactjs uses a &lt;a href="http://tonyfreed.com/blog/what_is_virtual_dom"&gt;virtual dom&lt;/a&gt;. Another
+requirement I wanted was to display the suggestions above the input making it a bit more mobile 
+friendly.&lt;/p&gt;
+
+&lt;p&gt;The solution I came up with is using typeahead's 
+&lt;a href="https://github.com/twitter/typeahead.js/blob/master/doc/bloodhound.md#remote"&gt;bloodhound engine&lt;/a&gt;
+and adding the results to the reactjs render myself.&lt;/p&gt;
+
+&lt;p&gt;Here is an example of the minimum code required to get this running:&lt;/p&gt;
+
+&lt;pre class="highlight javascript"&gt;&lt;code&gt;&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;SampleAutoComplete&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;React&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;createClass&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+
+  &lt;span class="na"&gt;getInitialState&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[],&lt;/span&gt; 
+            &lt;span class="na"&gt;more_suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[],&lt;/span&gt; &lt;span class="na"&gt;bloodhound_initialized&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;false&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;handleNameChange&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;""&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="na"&gt;suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[],&lt;/span&gt; &lt;span class="na"&gt;more_suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[]});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;findSuggestions&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;target&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;findSuggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhound_initialized&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhound&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;search&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;handleNameSuggestions&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+          &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;handleAdditionalNameSuggestions&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;handleNameSuggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;suggested_names&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;suggested_names&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;handleAdditionalNameSuggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;suggested_names&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;more_suggestions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;suggested_names&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;componentDidMount&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhound&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;Bloodhound&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+      &lt;span class="na"&gt;datumTokenizer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Bloodhound&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;tokenizers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;whitespace&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="na"&gt;queryTokenizer&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nx"&gt;Bloodhound&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;tokenizers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;whitespace&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="na"&gt;sufficient&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+      &lt;span class="na"&gt;prefetch&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"/my/prefetch/url.json"&lt;/span&gt; &lt;span class="p"&gt;},&lt;/span&gt;
+      &lt;span class="na"&gt;remote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="na"&gt;url&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"/my/remote/url.json?query=%QUERY"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                &lt;span class="na"&gt;wildcard&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'%QUERY'&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhound&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nx"&gt;done&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhoundInitialized&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;bloodhoundInitialized&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;setState&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="na"&gt;bloodhound_initialized&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;});&lt;/span&gt;
+  &lt;span class="p"&gt;},&lt;/span&gt;
+
+  &lt;span class="na"&gt;render&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;suggestions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;suggestions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;concat&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;more_suggestions&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;slice&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;rendered_suggestions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;suggestions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;button&lt;/span&gt; &lt;span class="nx"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"name-suggestion"&lt;/span&gt; &lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;"suggested-"&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/button&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;
+&lt;/span&gt;      &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;div&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="nx"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"col-xs-12"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;rendered_suggestions&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/div&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;
+&lt;/span&gt;      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;div&lt;/span&gt; &lt;span class="nx"&gt;className&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"col-xs-12"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;input&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;name&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="nx"&gt;onChange&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;handleNameChange&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+               &lt;span class="nx"&gt;autoComplete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;state&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;bloodhound_initialized&lt;/span&gt; &lt;span class="p"&gt;?&lt;/span&gt; &lt;span class="s1"&gt;'off'&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'on'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="sr"&gt;/&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;
+&lt;/span&gt;      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/div&lt;/span&gt;&lt;span class="err"&gt;&amp;gt;
+&lt;/span&gt;    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="sr"&gt;/div&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;;
+&lt;/span&gt;  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can find the grocery app version of the code in theses pull requests: 
+&lt;a href="https://github.com/my-grocery-price-book/www/pull/12/files"&gt;Shopping list autocomplete&lt;/a&gt; and
+&lt;a href="https://github.com/my-grocery-price-book/www/pull/13"&gt;Additional suggestions on shopping list&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also feel free to login as a Guest and give it a try yourself with creating a shopping list on
+ &lt;a href="http://www.my-grocery-price-book.co.za/shopping_lists"&gt;My Grocery Price Book&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Building a component library</title>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/04/18/component-library.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/04/18/component-library.html</id>
+    <published>2016-04-18T02:00:00+02:00</published>
+    <updated>2016-04-21T11:35:49+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;When working with a team of frontend developers/designers or working by yourself, having a components list of what css
+is available to you can be a real time saver. I don't know how much longer I would have taken without bootstraps 
+components. There is a small rails gem (component_library)[https://github.com/richarcher/component_library] that allows you to build your
+own component library. I am also using it to see my reactjs components. Feel free to check it out in action on 
+(My Grocery Price Book)[http://www.my-grocery-price-book.co.za/components].&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Writing jasmine test for reactjs components on Ruby on Rails</title>
     <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/04/11/jasmine-test-for-react-rails.html"/>
@@ -278,81 +395,6 @@ Just run &lt;code&gt;rubocop -aR&lt;/code&gt; which will automatically update yo
 &lt;p&gt;If you follow those guideslines and refactor accordly you should end with simpler, more readable and more maintainable
 code.&lt;/p&gt;
 
-</content>
-  </entry>
-  <entry>
-    <title>Vagrant and Ansible the ultimate combo</title>
-    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2015/09/27/vagrant-and-ansible.html"/>
-    <id>http://blog.my-grocery-price-book.co.za/2015/09/27/vagrant-and-ansible.html</id>
-    <published>2015-09-27T02:00:00+02:00</published>
-    <updated>2016-01-29T17:57:50+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;So for the last few months I have been using &lt;a href="https://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; and 
-&lt;a href="http://www.ansible.com/configuration-management"&gt;Ansible&lt;/a&gt; for any new projects that I have to work on. &lt;/p&gt;
-
-&lt;p&gt;The idea behind vagrant is to allow you to isolate all the software requirements to run your code for different projects
-inside separate virtual machines. Vagrant makes it easier to work on different projects with conflicting requirements by
-isolating them in different virtual machines. For example, two different projects requiring different versions of MYSQL.
-It also has the added benefit of not cluttering your actual machine with all the projects unique and different software 
-requirements.&lt;/p&gt;
-
-&lt;p&gt;Ansible is a powerful automation tool that allows you to easily setup new (and old) servers with the required
-software it needs. This makes setting up new enviroments a breeze.&lt;/p&gt;
-
-&lt;p&gt;The combination of Anisble and Vagrant is currently a real powerful way of setting up development
-enviroments quickly. If you add the Ansible scripts to your source control, you will have the changing requirements
-of your application setup in your source history.&lt;/p&gt;
-
-&lt;p&gt;I have recently taken the challenge of destroying my virtual machines every Monday and rebuilding it using Vagrant and
- Ansible. The idea being that I should be able to continue working within minutes and if that is not the case, updating
- the Ansible scripts with the required changes. This will help me make sure anything important required to work on the
- project is in source control, whether that be code, data or software setup.&lt;/p&gt;
-
-&lt;p&gt;This is currently my prefered method of working with the my-grocery-price-book-code. If you too are interested in this
-sort of setup, I recommended you take a look at&lt;br /&gt;
-&lt;a href="https://bitbucket.org/grantspeelman/my-grocery-price-book.co.za/src/d43c1610845416273530eb526e038c42bb70b813/Vagrantfile?at=master&amp;amp;fileviewer=file-view-default#Vagrantfile-120"&gt;Vagrantfile&lt;/a&gt;
-and the
-&lt;a href="https://bitbucket.org/grantspeelman/my-grocery-price-book.co.za/src/d43c1610845416273530eb526e038c42bb70b813/ansible/?at=master"&gt;Ansible Scripts&lt;/a&gt;
-of the my grocery price book code.&lt;/p&gt;
-
-&lt;p&gt;Also if you have not worked with either of the 2 before or would like to know more about them, I recommend you check
-out their Getting Started pages:
-&lt;a href="https://docs.vagrantup.com/v2/getting-started/"&gt;Vagrant&lt;/a&gt; and &lt;a href="http://docs.ansible.com/ansible/intro_getting_started.html"&gt;Ansible&lt;/a&gt;&lt;/p&gt;
-
-</content>
-  </entry>
-  <entry>
-    <title>Current System Architecture</title>
-    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2015/09/09/system-architecture.html"/>
-    <id>http://blog.my-grocery-price-book.co.za/2015/09/09/system-architecture.html</id>
-    <published>2015-09-09T02:00:00+02:00</published>
-    <updated>2016-01-29T17:57:50+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;Having a system architecture might seem like overkill for this project, but I am hoping it will help me keep the
-system in my head and help make more insightful decisions. &lt;/p&gt;
-
-&lt;p&gt;I almost always find it easy to talk about system architecture when you have a diagram. So I decided to create one using
-&lt;a href="https://www.draw.io/"&gt;draw.io&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt="alt text" title="Grocery Price Book System Architecture" src="/images/GrocerySystemArch.svg" /&gt;&lt;/p&gt;
-
-&lt;p&gt;So the goal is to link the traditional Grocery Price Book with the of Crowd Sourcing. This will hopefully make it
-easier for people to share pricing information thus increasing the power of your Price Book.&lt;/p&gt;
-
-&lt;p&gt;The system has been split into 2 main apps. The User Facing Price Book application part that will handle all the user 
-specific information and a API to store all the pricing infomation. This should make it possible for vendors to load 
-their pricing infomation into the API if they want to.This is all still mostly theory at the moment. 
-Hoping to start eating my own dog food soon.&lt;/p&gt;
-
-&lt;p&gt;On a slightly different note…&lt;/p&gt;
-
-&lt;p&gt;I have recently completed 'viewing your prices' on the price book page which pulls its infomation from the API.
-Things left to do is build the 'Shopping List' and completing the 'Price Compare' sections, then we should have 
-our MVP.&lt;/p&gt;
 </content>
   </entry>
 </feed>

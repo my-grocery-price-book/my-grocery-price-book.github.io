@@ -14,7 +14,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <title>My Grocery Price Book Blog</title>
+  <title>Building a component library</title>
   <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 </head>
 <body>
@@ -39,15 +39,40 @@
   <div class="row">
 
     <div class="col-sm-8 blog-main">
-      <h1>Archive for
-    Aug 30 2015
-</h1>
+          <div class="blog-post">
+      <h2 class="blog-post-title">Building a component library</h2>
+      <p class="blog-post-meta">18 April 2016</p>
+      <p>When working with a team of frontend developers/designers or working by yourself, having a components list of what css
+is available to you can be a real time saver. I don't know how much longer I would have taken without bootstraps 
+components. There is a small rails gem (component_library)[https://github.com/richarcher/component_library] that allows you to build your
+own component library. I am also using it to see my reactjs components. Feel free to check it out in action on 
+(My Grocery Price Book)[http://www.my-grocery-price-book.co.za/components].</p>
 
+    </div>
 
-<ul>
-    <li><a href="/2015/08/30/the-free-time-pickle.html">The Free Time Pickle and discovering Roda</a> <span>Aug 30</span></li>
-</ul>
+    <div id="disqus_thread"></div>
+    <script>
+      /**
+       * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+       */
+      /*
+       var disqus_config = function () {
+       this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+       this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+       };
+       */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
 
+        s.src = '//my-grocery-price-book.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
     </div>
 
