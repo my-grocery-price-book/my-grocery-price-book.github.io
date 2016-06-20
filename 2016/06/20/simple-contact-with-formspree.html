@@ -14,7 +14,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <title>Tech Blog is Alive</title>
+  <title>Creating a simple Contact form using formspree.io</title>
   <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 </head>
 <body>
@@ -40,21 +40,41 @@
 
     <div class="col-sm-8 blog-main">
           <div class="blog-post">
-      <h2 class="blog-post-title">Tech Blog is Alive</h2>
-      <p class="blog-post-meta">19 August 2015</p>
-      <p>So the Blog is alive and kicking and I will be blogging here 
-about the journey of the grocery price book app I am building.</p>
+      <h2 class="blog-post-title">Creating a simple Contact form using formspree.io</h2>
+      <p class="blog-post-meta">20 June 2016</p>
+      <p>Creating a simple contact form with Ruby on Rails is straight forward and simple but I found an even
+simpler way of doing your contact form.</p>
 
-<p>I have finally settled on what tools I'll be using to write this blog, thanks to motivation from 
-Michael Bleigh on the <a href="https://divshot.com/blog/hosting/dont-host-static-sites-on-heroku/">Divshot blog</a></p>
+<p>If all you want is an email sent to you with the details of
+the contact form then I recommend that you take a look at <a href="https://formspree.io/">formspree</a>. It allows
+you to add a form on your page that will be emailed to a desired address and it's real simple to
+get going.</p>
 
-<p>I found this awesome ruby gem called <a href="https://middlemanapp.com/">middleman</a> and after following Matthew Crist 
-<a href="https://hondo.wtf/2015/01/05/how-to-host-a-middleman-blog-on-divshot">blog post</a> to get me initially setup, 
-I <a href="http://getbootstrap.com">bootstrapped</a> it and wrote this first article.</p>
+<p>Here is the form html used on my-grocery-price-book.co.za</p>
 
-<p>I will write a follow up article with a focus on what I am trying to accomplish.</p>
+<pre class="highlight html"><code>    <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"https://formspree.io/info@my-grocery-price-book.co.za"</span>
+          <span class="na">method=</span><span class="s">"POST"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_next"</span> <span class="na">value=</span><span class="s">"&lt;%= thank_you_url %&gt;"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="na">name=</span><span class="s">"_subject"</span> <span class="na">value=</span><span class="s">"My Price Grocery Book contact"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"_gotcha"</span> <span class="na">style=</span><span class="s">"display:none"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"input_your_name"</span><span class="nt">&gt;</span>Your Name<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">"input_your_name"</span> <span class="na">name=</span><span class="s">"name"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Your Name"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"input_email_address"</span><span class="nt">&gt;</span>Email address<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="na">name=</span><span class="s">"_replyto"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">id=</span><span class="s">"input_email_address"</span> <span class="na">placeholder=</span><span class="s">"Email"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"textarea_message"</span><span class="nt">&gt;</span>Message<span class="nt">&lt;/label&gt;</span>
+        <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">rows=</span><span class="s">"3"</span> <span class="na">name=</span><span class="s">"message"</span> <span class="na">id=</span><span class="s">"textarea_message"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn btn-default"</span><span class="nt">&gt;</span>Send<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+</code></pre>
 
-<p>My thoughts and discoveries around this process have finally found a place to live on the internet of things.</p>
+<p>Thats it, you now have a contact form. Because the form is plain html you can even use this on
+static sites. Have a look on the <a href="https://formspree.io/">formspree website</a> for more details.</p>
 
     </div>
 
