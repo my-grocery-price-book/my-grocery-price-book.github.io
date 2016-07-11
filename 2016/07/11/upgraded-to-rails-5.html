@@ -14,7 +14,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <title>My Grocery Price Book Blog</title>
+  <title>Upgraded Site to use Rails 5</title>
   <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 </head>
 <body>
@@ -39,15 +39,52 @@
   <div class="row">
 
     <div class="col-sm-8 blog-main">
-      <h1>Archive for
-    Jun 20 2016
-</h1>
+          <div class="blog-post">
+      <h2 class="blog-post-title">Upgraded Site to use Rails 5</h2>
+      <p class="blog-post-meta">
+        11 July 2016
+        (Reading Time: less than 1 minute)
+      </p>
+      <p>I must say that upgrading from Rails 4.2 to Rails 5.0 has been way smoother than previous rails.
+Upgrading from 3.2 to 4.0 was hard and upgrading from 2.3 to 3.0 was a plain nightmare.
+Hands down to the Rails core team this time around, they have really done a Great job.</p>
 
+<p>I have managed to <a href="https://github.com/my-grocery-price-book/www/pull/47/files">upgrade My Grocery Price Book to Rails 5 already</a>
+and even remove all deprecation warning.</p>
 
-<ul>
-    <li><a href="/2016/06/20/simple-contact-with-formspree.html">Creating a simple Contact form using formspree.io</a> <span>Jun 20</span></li>
-</ul>
+<p>If you plan on upgrading soon, <a href="http://guides.rubyonrails.org/upgrading_ruby_on_rails.html">Rails Guides</a>
+is a really good place to start.</p>
 
+<p>If you can't do the whole upgrade in one go, have a look at <a href="https://gist.github.com/grantspeelman/235f4cf83fdc4fab94fc">this Gist</a>
+which will enable you to do the upgrade piece meal.</p>
+
+<p>Happy upgrading</p>
+
+    </div>
+
+    <div id="disqus_thread"></div>
+    <script>
+      /**
+       * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+       * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+       */
+      /*
+       var disqus_config = function () {
+       this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+       this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+       };
+       */
+      (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+
+        s.src = '//my-grocery-price-book.disqus.com/embed.js';
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
     </div>
 

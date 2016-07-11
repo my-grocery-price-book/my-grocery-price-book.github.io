@@ -5,10 +5,35 @@
   <id>http://blog.my-grocery-price-book.co.za/</id>
   <link href="http://blog.my-grocery-price-book.co.za/"/>
   <link href="http://blog.my-grocery-price-book.co.za/feed.xml" rel="self"/>
-  <updated>2016-06-20T02:00:00+02:00</updated>
+  <updated>2016-07-11T02:00:00+02:00</updated>
   <author>
     <name>Grant Petersen-Speelman</name>
   </author>
+  <entry>
+    <title>Upgraded Site to use Rails 5</title>
+    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/07/11/upgraded-to-rails-5.html"/>
+    <id>http://blog.my-grocery-price-book.co.za/2016/07/11/upgraded-to-rails-5.html</id>
+    <published>2016-07-11T02:00:00+02:00</published>
+    <updated>2016-07-11T23:49:53+02:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;p&gt;I must say that upgrading from Rails 4.2 to Rails 5.0 has been way smoother than previous rails.
+Upgrading from 3.2 to 4.0 was hard and upgrading from 2.3 to 3.0 was a plain nightmare.
+Hands down to the Rails core team this time around, they have really done a Great job.&lt;/p&gt;
+
+&lt;p&gt;I have managed to &lt;a href="https://github.com/my-grocery-price-book/www/pull/47/files"&gt;upgrade My Grocery Price Book to Rails 5 already&lt;/a&gt;
+and even remove all deprecation warning.&lt;/p&gt;
+
+&lt;p&gt;If you plan on upgrading soon, &lt;a href="http://guides.rubyonrails.org/upgrading_ruby_on_rails.html"&gt;Rails Guides&lt;/a&gt;
+is a really good place to start.&lt;/p&gt;
+
+&lt;p&gt;If you can't do the whole upgrade in one go, have a look at &lt;a href="https://gist.github.com/grantspeelman/235f4cf83fdc4fab94fc"&gt;this Gist&lt;/a&gt;
+which will enable you to do the upgrade piece meal.&lt;/p&gt;
+
+&lt;p&gt;Happy upgrading&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Creating a simple Contact form using formspree.io</title>
     <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/06/20/simple-contact-with-formspree.html"/>
@@ -299,120 +324,6 @@ available.
   &lt;li&gt;More Reading on &lt;a href="http://jasmine.github.io/2.0/introduction.html"&gt;Jasmine&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;More Reading on &lt;a href="http://facebook.github.io/react/docs/test-utils.html"&gt;reactjs TestUtils&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Acceptance testing multiple sessions/actors using capybara</title>
-    <link rel="alternate" href="http://blog.my-grocery-price-book.co.za/2016/03/31/capybara-personas.html"/>
-    <id>http://blog.my-grocery-price-book.co.za/2016/03/31/capybara-personas.html</id>
-    <published>2016-03-31T02:00:00+02:00</published>
-    <updated>2016-03-31T08:42:35+02:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">&lt;p&gt;I recently wanted to add functionality that would allow multiple shoppers to work on the same Price Book. 
-I wanted to write my feature spec in such a way that it was obvious that there were multiple actors and it allowed me to 
-easily capture common logic like signing in.&lt;/p&gt;
-
-&lt;p&gt;I wanted to use 2 gems to archive this, obviously &lt;a href="https://github.com/jnicklas/capybara"&gt;capybara&lt;/a&gt; and secondly
-&lt;a href="https://github.com/dockyard/capybara-email"&gt;capybara-email&lt;/a&gt; for emails&lt;/p&gt;
-
-&lt;p&gt;I created a &lt;a href="https://gist.github.com/grantspeelman/cf1a333ea187285f6adfb1b929d3b198"&gt;base class&lt;/a&gt; I felt was independent 
-of the app&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PersonaSession&lt;/span&gt;
-  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;DSL&lt;/span&gt;
-  &lt;span class="kp"&gt;include&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Email&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;DSL&lt;/span&gt;
-
-  &lt;span class="c1"&gt;# override to stop usage of global current_session&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;page&lt;/span&gt;
-    &lt;span class="vi"&gt;@page&lt;/span&gt; &lt;span class="o"&gt;||=&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;current_driver&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Capybara&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;click_link_in_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;link_name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;open_email&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@email&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Rails&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;configuration&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;action_mailer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;default_url_options&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:host&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;link_path&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;find_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;link_name&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="ss"&gt;:href&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="nf"&gt;gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"http://&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="n"&gt;link_path&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;perform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;instance_exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;block&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then I created a shopper specific class&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;ShopperPersonaSession&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;PersonaSession&lt;/span&gt;
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;:)&lt;/span&gt;
-    &lt;span class="k"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="vi"&gt;@email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;
-    &lt;span class="vi"&gt;@password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'password'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sign_up&lt;/span&gt;
-    &lt;span class="n"&gt;visit&lt;/span&gt; &lt;span class="s1"&gt;'/shoppers/sign_up'&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;current_path&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;try&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:include?&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'/shoppers/sign_up'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Email'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="vi"&gt;@email&lt;/span&gt;
-    &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Password'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="vi"&gt;@password&lt;/span&gt;
-    &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Password confirmation'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="vi"&gt;@password&lt;/span&gt;
-    &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Sign up'&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This allowed me to write a test like this&lt;/p&gt;
-
-&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SharingAShoppingListTest&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;FeatureTest&lt;/span&gt;
-  &lt;span class="n"&gt;setup&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="vi"&gt;@grant&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ShopperPersonaSession&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'grant@example.com'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;sign_up&lt;/span&gt;
-    &lt;span class="vi"&gt;@kate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;ShopperPersonaSession&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;email: &lt;/span&gt;&lt;span class="s1"&gt;'kate@example.com'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-
-  &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="s1"&gt;'Grant and kate work together on a shopping list'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-    &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Price Book'&lt;/span&gt;
-      &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Invite'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'Kate'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Email'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'kate@example.com'&lt;/span&gt;
-      &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Invite'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@kate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;click_link_in_email&lt;/span&gt; &lt;span class="s1"&gt;'My Price Book'&lt;/span&gt;
-      &lt;span class="n"&gt;sign_up&lt;/span&gt;
-      &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Accept'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Shopping List'&lt;/span&gt;
-      &lt;span class="n"&gt;click_on&lt;/span&gt; &lt;span class="s1"&gt;'New Shopping List'&lt;/span&gt;
-      &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Edit Title'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Title'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'Our Shopping'&lt;/span&gt;
-      &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Update'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_css?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'span'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;text: &lt;/span&gt;&lt;span class="s1"&gt;'Our Shopping'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_no_css?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'span'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;text: &lt;/span&gt;&lt;span class="s1"&gt;'Update Failed'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@kate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;perform&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
-      &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Shopping List'&lt;/span&gt;
-      &lt;span class="n"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Items'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Item name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'bread'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Unit'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'loaves'&lt;/span&gt;
-      &lt;span class="n"&gt;fill_in&lt;/span&gt; &lt;span class="s1"&gt;'Amount'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;with: &lt;/span&gt;&lt;span class="s1"&gt;'2'&lt;/span&gt;
-      &lt;span class="n"&gt;click_button&lt;/span&gt; &lt;span class="s1"&gt;'Add'&lt;/span&gt;
-    &lt;span class="k"&gt;end&lt;/span&gt;
-
-    &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="vi"&gt;@kate&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_content?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'bread'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;click_link&lt;/span&gt; &lt;span class="s1"&gt;'Refresh'&lt;/span&gt;
-
-    &lt;span class="n"&gt;assert&lt;/span&gt; &lt;span class="vi"&gt;@grant&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;has_content?&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'bread'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-  &lt;span class="k"&gt;end&lt;/span&gt;
-&lt;span class="k"&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;
 </content>
   </entry>
 </feed>
